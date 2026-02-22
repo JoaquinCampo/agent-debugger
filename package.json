@@ -1,0 +1,38 @@
+{
+  "name": "agent-debugger",
+  "version": "0.1.0",
+  "description": "CLI debugger for AI agents — debug any language via DAP",
+  "type": "module",
+  "bin": {
+    "agent-debugger": "./bin/agent-debugger"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/src/session.d.ts",
+      "import": "./dist/src/session.js"
+    }
+  },
+  "files": [
+    "bin/",
+    "dist/",
+    "skills/"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc && chmod +x bin/agent-debugger",
+    "dev": "tsc --watch",
+    "test": "node --test dist/test/*.test.js",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "typescript": "^5.8.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}
