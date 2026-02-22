@@ -194,7 +194,7 @@ function formatResult(result: CommandResult): string {
 const HELP = `agent-debugger \u2014 CLI debugger for AI agents
 
 Usage:
-  agent-debugger start <script> [--break file:line] [--python path] [--args ...]
+  agent-debugger start <script> [--break file:line] [--runtime path] [--args ...]
   agent-debugger vars                        Get local variables
   agent-debugger eval <expression>           Evaluate expression
   agent-debugger step [into|out]             Step over/into/out
@@ -224,7 +224,7 @@ async function main(): Promise<void> {
       }
       const script = args[1]!;
       const breakpoints: string[] = [];
-      let pythonPath: string | undefined;
+      let runtimePath: string | undefined;
       let scriptArgs: string[] | undefined;
       let stopOnEntry = false;
 
@@ -233,8 +233,8 @@ async function main(): Promise<void> {
         if ((args[i] === "--break" || args[i] === "-b") && i + 1 < args.length) {
           breakpoints.push(args[i + 1]!);
           i += 2;
-        } else if (args[i] === "--python" && i + 1 < args.length) {
-          pythonPath = args[i + 1]!;
+        } else if ((args[i] === "--runtime" || args[i] === "--python") && i + 1 < args.length) {
+          runtimePath = args[i + 1]!;
           i += 2;
         } else if (args[i] === "--stop-on-entry") {
           stopOnEntry = true;
@@ -258,7 +258,7 @@ async function main(): Promise<void> {
         breakpoints,
         stop_on_entry: stopOnEntry,
       };
-      if (pythonPath) cmd.python = pathResolve(pythonPath);
+      if (runtimePath) cmd.runtime = pathResolve(runtimePath);
       if (scriptArgs) cmd.args = scriptArgs;
       result = await sendCommand(cmd);
       break;

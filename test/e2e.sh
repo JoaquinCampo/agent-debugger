@@ -90,7 +90,7 @@ cleanup
 
 OUT=$(run_cmd $BIN start "$FIXTURES/recursive_bug.py" \
     --break "$FIXTURES/recursive_bug.py:18" \
-    --python "$PYTHON")
+    --runtime "$PYTHON")
 assert_contains "recursive: starts and pauses" "paused" "$OUT"
 assert_contains "recursive: hits breakpoint" "max_depth" "$OUT"
 
@@ -121,7 +121,7 @@ cleanup
 # Line 60: records = load_records() — inside main()
 OUT=$(run_cmd $BIN start "$FIXTURES/async_pipeline.py" \
     --break "$FIXTURES/async_pipeline.py:60" \
-    --python "$PYTHON")
+    --runtime "$PYTHON")
 assert_contains "pipeline: starts" "paused" "$OUT"
 
 OUT=$(run_cmd $BIN vars)
@@ -155,7 +155,7 @@ cleanup
 # Line 47: transformed = self.transform_fn(event) — inside TransformingProcessor.process
 OUT=$(run_cmd $BIN start "$FIXTURES/class_inheritance.py" \
     --break "$FIXTURES/class_inheritance.py:47" \
-    --python "$PYTHON")
+    --runtime "$PYTHON")
 assert_contains "inheritance: starts" "paused" "$OUT"
 
 OUT=$(run_cmd $BIN vars)
@@ -182,7 +182,7 @@ cleanup
 
 OUT=$(run_cmd $BIN start "$FIXTURES/closure_bug.py" \
     --break "$FIXTURES/closure_bug.py:14" \
-    --python "$PYTHON")
+    --runtime "$PYTHON")
 assert_contains "closure: starts" "paused" "$OUT"
 
 OUT=$(run_cmd $BIN vars)
@@ -210,7 +210,7 @@ cleanup
 # Line 92: can_transfer_1 = alice.balance >= 75 — inside simulate_race_condition
 OUT=$(run_cmd $BIN start "$FIXTURES/concurrent_state.py" \
     --break "$FIXTURES/concurrent_state.py:92" \
-    --python "$PYTHON")
+    --runtime "$PYTHON")
 assert_contains "concurrent: starts" "paused" "$OUT"
 
 OUT=$(run_cmd $BIN vars)
@@ -238,7 +238,7 @@ cleanup
 OUT=$(run_cmd $BIN start "$FIXTURES/buggy_script.py" \
     --break "$FIXTURES/buggy_script.py:23" \
     --break "$FIXTURES/buggy_script.py:26" \
-    --python "$PYTHON")
+    --runtime "$PYTHON")
 assert_contains "multi-bp: starts paused" "paused" "$OUT"
 
 # Continue to next breakpoint
@@ -256,7 +256,7 @@ cleanup
 
 OUT=$(run_cmd $BIN start "$FIXTURES/closure_bug.py" \
     --break "$FIXTURES/closure_bug.py:14:i == 3" \
-    --python "$PYTHON")
+    --runtime "$PYTHON")
 assert_contains "conditional: starts" "paused" "$OUT"
 
 OUT=$(run_cmd $BIN eval "i")
@@ -270,7 +270,7 @@ cleanup
 
 OUT=$(run_cmd $BIN start "$FIXTURES/recursive_bug.py" \
     --break "$FIXTURES/recursive_bug.py:22" \
-    --python "$PYTHON")
+    --runtime "$PYTHON")
 assert_contains "step-out: starts" "paused" "$OUT"
 
 # Step into
@@ -291,7 +291,7 @@ cleanup
 # Break at line 48 (print results) which runs only once, then continue to let it finish
 OUT=$(run_cmd $BIN start "$FIXTURES/closure_bug.py" \
     --break "$FIXTURES/closure_bug.py:62" \
-    --python "$PYTHON")
+    --runtime "$PYTHON")
 assert_contains "terminate: starts" "paused" "$OUT"
 
 # Continue past — the program has no more breakpoints and will finish
@@ -311,7 +311,7 @@ cleanup
 # Break in closure_bug at the start of main, then add another breakpoint further down
 OUT=$(run_cmd $BIN start "$FIXTURES/closure_bug.py" \
     --break "$FIXTURES/closure_bug.py:39" \
-    --python "$PYTHON")
+    --runtime "$PYTHON")
 assert_contains "add-bp: starts" "paused" "$OUT"
 
 # Add a new breakpoint at line 54 (second print)
@@ -330,13 +330,13 @@ cleanup
 
 OUT=$(run_cmd $BIN start "$FIXTURES/buggy_script.py" \
     --break "$FIXTURES/buggy_script.py:26" \
-    --python "$PYTHON")
+    --runtime "$PYTHON")
 assert_contains "lifecycle: first start" "paused" "$OUT"
 
 # Double start should fail
 OUT=$(run_cmd $BIN start "$FIXTURES/buggy_script.py" \
     --break "$FIXTURES/buggy_script.py:26" \
-    --python "$PYTHON")
+    --runtime "$PYTHON")
 assert_contains "lifecycle: double start errors" "Error" "$OUT"
 
 # Close
@@ -349,7 +349,7 @@ cleanup
 # Start again after close
 OUT=$(run_cmd $BIN start "$FIXTURES/buggy_script.py" \
     --break "$FIXTURES/buggy_script.py:26" \
-    --python "$PYTHON")
+    --runtime "$PYTHON")
 assert_contains "lifecycle: restart after close" "paused" "$OUT"
 
 run_cmd $BIN close >/dev/null
@@ -361,7 +361,7 @@ cleanup
 # Break at line 25 (total += data["age"]) to see the data before it does the add
 OUT=$(run_cmd $BIN start "$FIXTURES/buggy_script.py" \
     --break "$FIXTURES/buggy_script.py:25" \
-    --python "$PYTHON")
+    --runtime "$PYTHON")
 assert_contains "workflow: starts at breakpoint" "paused" "$OUT"
 assert_contains "workflow: in calculate_average_age" "calculate_average_age" "$OUT"
 

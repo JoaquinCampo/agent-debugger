@@ -66,7 +66,7 @@ export class Session {
     }
 
     // Check adapter is installed
-    const installErr = await this.adapter.checkInstalled(cmd.python);
+    const installErr = await this.adapter.checkInstalled(cmd.runtime);
     if (installErr) {
       this.state = "idle";
       return { error: installErr };
@@ -79,7 +79,7 @@ export class Session {
         args: cmd.args,
         cwd: cmd.cwd || dirname(script),
         stopOnEntry: cmd.stop_on_entry,
-        runtimePath: cmd.python,
+        runtimePath: cmd.runtime,
       });
       this.adapterProcess = spawnResult.process;
 
@@ -100,7 +100,7 @@ export class Session {
       args: cmd.args,
       cwd: cmd.cwd || dirname(script),
       stopOnEntry: cmd.stop_on_entry,
-      runtimePath: cmd.python,
+      runtimePath: cmd.runtime,
       breakpoints,
     });
 

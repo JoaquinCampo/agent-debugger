@@ -53,7 +53,7 @@ agent-debugger start <script> [options]
 
 Options:
   --break, -b <file:line[:condition]>   Set a breakpoint (repeatable)
-  --python <path>                       Path to Python interpreter
+  --runtime <path>                      Path to language runtime (e.g. python, node)
   --stop-on-entry                       Pause on the first line
   --args <...>                          Arguments to pass to the script
 ```
@@ -91,7 +91,7 @@ agent-debugger break app.py:60
 pip install debugpy
 
 # Use a specific Python interpreter
-agent-debugger start app.py --break app.py:10 --python /path/to/venv/bin/python
+agent-debugger start app.py --break app.py:10 --runtime /path/to/venv/bin/python
 ```
 
 **JavaScript/TypeScript** — requires VS Code's js-debug extension, which ships with any VS Code install. The adapter auto-detects it from `~/.vscode/extensions/`. To use a custom location:
@@ -129,22 +129,3 @@ The `Session` class is exported for use as a library:
 ```js
 import { Session } from "agent-debugger";
 ```
-
-## Development
-
-```bash
-git clone <repo>
-cd agent-debugger
-npm install
-npm run build
-
-# Run the e2e test suite (requires debugpy)
-bash test/e2e.sh
-
-# Watch mode
-npm run dev
-```
-
-## License
-
-MIT

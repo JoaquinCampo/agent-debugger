@@ -15,7 +15,7 @@ export interface LaunchOpts {
   args?: string[];
   cwd?: string;
   stopOnEntry?: boolean;
-  /** Language-specific: e.g. python path */
+  /** Path to language runtime (e.g. python3, node, dlv) */
   runtimePath?: string;
 }
 

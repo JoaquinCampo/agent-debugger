@@ -9,7 +9,7 @@ export const StartCommand = z.object({
   script: z.string(),
   language: z.string().optional(),
   breakpoints: z.array(z.string()).optional(),
-  python: z.string().optional(),
+  runtime: z.string().optional(),
   args: z.array(z.string()).optional(),
   cwd: z.string().optional(),
   stop_on_entry: z.boolean().optional(),

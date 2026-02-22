@@ -1,12 +1,12 @@
 ---
-name: runtime-debugger
+name: agent-debugger
 description: Use when a program crashes, a test fails, or code produces wrong results and reading the source isn't enough to see why. Lets you pause execution at any line and inspect the actual runtime state, variable values, types, call stacks, to find what went wrong.
 allowed-tools: Bash(agent-debugger:*)
 ---
 
-# Runtime Debugger
+# Agent Debugger
 
-A runtime debugger for programs. Set breakpoints, inspect state, evaluate expressions, test fixes in-place.
+A debugger for AI agents. Set breakpoints, inspect state, evaluate expressions, test fixes in-place.
 
 ## Philosophy
 
@@ -39,7 +39,7 @@ The debugger is a scalpel, not a flashlight. You don't turn it on to look around
 ## Commands
 
 ```bash
-agent-debugger start <script> --break file:line[:condition] [--python path] [--args ...]
+agent-debugger start <script> --break file:line[:condition] [--runtime path] [--args ...]
 agent-debugger eval <expression>        # Run any expression in the current frame
 agent-debugger vars                     # List local variables (prefer eval)
 agent-debugger step [into|out]          # Step over / into function / out of function
