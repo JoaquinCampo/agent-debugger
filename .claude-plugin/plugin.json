@@ -1,0 +1,13 @@
+{
+  "name": "agent-debugger",
+  "version": "1.0.0",
+  "description": "Pause execution and inspect runtime state via DAP. Set breakpoints, evaluate expressions, test fixes in-place. Attach to running processes by PID — no restart, no code changes, no manual setup.",
+  "author": {
+    "name": "Joaquin Campo"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/JoaquinCampo/agent-debugger",
+  "repository": "https://github.com/JoaquinCampo/agent-debugger",
+  "keywords": ["debugger", "dap", "runtime", "inspection", "breakpoints"],
+  "skills": "./skills/"
+}

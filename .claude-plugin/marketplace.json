@@ -1,0 +1,23 @@
+{
+  "name": "agent-debugger",
+  "owner": {
+    "name": "Joaquin Campo"
+  },
+  "metadata": {
+    "description": "DAP-based debugger plugin for Claude Code: attach to live processes by PID, set breakpoints, eval expressions",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "agent-debugger",
+      "source": "./",
+      "description": "Pause execution and inspect runtime state via DAP. Attach to running processes by PID — no restart, no code changes.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Joaquin Campo"
+      },
+      "category": "development",
+      "keywords": ["debugger", "dap", "runtime", "inspection"]
+    }
+  ]
+}
